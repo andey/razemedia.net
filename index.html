@@ -4,334 +4,490 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Razemedia | Cloud-Native Software Development</title>
-    <meta name="description" content="Razemedia builds fast, secure, and scalable cloud-native applications using AWS, Azure, GCP, Kubernetes, and modern architectures.">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Razemedia builds fast, secure, scalable cloud-native applications with AWS, Azure, GCP, Kubernetes & modern architectures.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         :root {
-            --primary: #4361ee;
-            --primary-dark: #3a56d4;
-            --dark: #0f172a;
-            --light: #f8fafc;
+            --primary: #0ea5e9;
+            --primary-dark: #0284c7;
+            --secondary: #06b6d4;
+            --accent: #f59e0b;
+            --dark: #0f0f23;
+            --dark-2: #1e1e2e;
+            --light: #fefefe;
             --gray: #64748b;
-            --success: #10b981;
+            --gradient: linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, #06b6d4 100%);
+            --gradient-dark: linear-gradient(135deg, #0f0f23 0%, #1e1e2e 100%);
         }
-        * { margin:0; padding:0; box-sizing:border-box; }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             line-height: 1.6;
             color: var(--dark);
             background: var(--light);
+            overflow-x: hidden;
         }
-        a { text-decoration: none; color: inherit; }
-        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        a { 
+            text-decoration: none; 
+            color: inherit; 
+        }
+
+        .container { 
+            width: 90%; 
+            max-width: 1400px; 
+            margin: 0 auto; 
+        }
 
         /* Header */
         header {
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
             position: fixed;
-            width: 100%;
             top: 0;
+            width: 100%;
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            background: rgba(254, 254, 254, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
         }
+
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 0;
+            padding: 1.2rem 0;
         }
+
         .logo {
-            font-size: 1.9rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
             font-weight: 700;
-            color: var(--primary);
-        }
-        .logo span { color: var(--dark); }
-        .nav-links a {
-            margin-left: 2rem;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover { color: var(--primary); }
-
-        /* Hero */
-        #hero {
-            padding: 130px 0 90px;
-            background: linear-gradient(135deg, #4361ee 0%, #3f37c9 100%);
-            color: white;
-            text-align: center;
-        }
-        #hero h1 {
-            font-size: 3.6rem;
-            margin-bottom: 1rem;
-        }
-        #hero p {
-            font-size: 1.3rem;
-            max-width: 750px;
-            margin: 0 auto 2.5rem;
-            opacity: 0.92;
-        }
-        .btn {
-            display: inline-block;
-            padding: 14px 34px;
-            background: white;
-            color: var(--primary-dark);
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s;
-            margin: 0 10px;
-        }
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.18);
-        }
-        .btn-outline {
-            background: transparent;
-            border: 2px solid white;
-            color: white;
-        }
-        .btn-outline:hover {
-            background: white;
-            color: var(--primary-dark);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        section { padding: 100px 0; }
-        h2 {
-            font-size: 2.8rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            color: var(--dark);
-        }
-
-        .services-grid, .tech-stack {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        .service-card, .tech-card {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-            transition: transform 0.3s;
-        }
-        .service-card:hover, .tech-card:hover {
-            transform: translateY(-10px);
-        }
-        .service-card i {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-        }
-
-        #about { background: #f1f5f9; }
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+        .nav-links {
+            display: flex;
             align-items: center;
-        }
-        .about-text p {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-            color: var(--gray);
+            gap: 2.5rem;
         }
 
-        /* NEW CONTACT SECTION */
-        #contact {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 120px 0;
+        .nav-links a {
+            font-weight: 500;
+            color: var(--dark);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: var(--gradient-dark);
             position: relative;
             overflow: hidden;
         }
-        
-        #contact::before {
+
+        #hero::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="none"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="75" cy="75" r="0.5" fill="rgba(255,255,255,0.03)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>');
-            pointer-events: none;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(14,165,233,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            animation: float 20s ease-in-out infinite;
         }
 
-        .contact-container {
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-content {
             position: relative;
             z-index: 2;
             max-width: 1000px;
-            margin: 0 auto;
             text-align: center;
+            color: white;
         }
 
-        #contact h2 { 
-            font-size: 3.2rem;
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 2rem;
+            color: white;
+        }
+
+        #hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(3.5rem, 6vw, 5.5rem);
+            font-weight: 800;
+            line-height: 1.1;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #fff 0%, #e2e8f0 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .contact-subtitle {
-            font-size: 1.25rem;
-            max-width: 600px;
-            margin: 0 auto 4rem;
+        .hero-subtitle {
+            font-size: 1.4rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
             opacity: 0.9;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 3rem;
-            margin-bottom: 4rem;
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
         }
 
-        @media (min-width: 768px) {
-            .contact-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .contact-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 2.5rem;
-            text-align: center;
-            transition: all 0.4s ease;
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
             position: relative;
             overflow: hidden;
         }
 
-        .contact-card::before {
+        .btn-primary {
+            background: white;
+            color: var(--primary-dark);
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        section {
+            padding: 120px 0;
+        }
+
+        h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            text-align: center;
+            margin-bottom: 4rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.6s;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
         }
 
-        .contact-card:hover::before {
-            left: 100%;
+        .service-card:hover::before {
+            transform: scaleX(1);
         }
 
-        .contact-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        .service-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.1);
         }
 
-        .contact-icon {
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient);
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 2rem;
-            color: white;
-            transition: all 0.3s ease;
-        }
-
-        .contact-card:hover .contact-icon {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
-        }
-
-        .contact-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .contact-email-link {
-            display: inline-block;
+            margin-bottom: 1.5rem;
             font-size: 1.8rem;
+            color: white;
+        }
+
+        .service-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        /* About */
+        #about {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
             font-weight: 700;
-            color: white;
-            padding: 1rem 2rem;
-            background: linear-gradient(135deg, var(--primary), #3a56d4);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 25px rgba(67, 97, 238, 0.3);
-            letter-spacing: -0.025em;
+            margin-bottom: 2rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .contact-email-link:hover {
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 20px 40px rgba(67, 97, 238, 0.4);
-            text-decoration: none;
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+            line-height: 1.8;
         }
 
-        .contact-cta {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 3rem;
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tech-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 16px;
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .contact-cta h3 {
-            color: var(--dark);
-            font-size: 1.6rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .contact-cta p {
-            color: var(--gray);
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 16px 40px;
-            background: linear-gradient(135deg, var(--primary), #3a56d4);
-            color: white;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            box-shadow: 0 10px 25px rgba(67, 97, 238, 0.3);
             transition: all 0.3s ease;
         }
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 20px 40px rgba(67, 97, 238, 0.4);
-            color: white;
-            text-decoration: none;
+        .tech-card:hover {
+            transform: translateY(-5px);
+            background: white;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
         }
 
+        .tech-card h4 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .stat-item h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        /* CTA */
+        #cta {
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            padding: 140px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 60%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: sparkle 15s linear infinite;
+        }
+
+        @keyframes sparkle {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        #cta h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(3rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        #cta p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            opacity: 0.95;
+            line-height: 1.7;
+        }
+
+        /* Footer */
         footer {
-            background: #0b1120;
+            background: var(--dark-2);
             color: #94a3b8;
             text-align: center;
-            padding: 2rem 0;
-            font-size: 0.9rem;
+            padding: 3rem 0;
         }
 
+        footer p {
+            font-size: 0.95rem;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            #hero h1 { font-size: 2.8rem; }
-            .about-content { grid-template-columns: 1fr; }
-            #contact h2 { font-size: 2.5rem; }
-            .contact-card { padding: 2rem; }
+            .nav-links {
+                gap: 1.5rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
         }
     </style>
 </head>
@@ -345,46 +501,61 @@
                     <a href="#hero">Home</a>
                     <a href="#services">Services</a>
                     <a href="#about">About</a>
-                    <a href="#contact">Contact</a>
+                    <a href="#cta">Work</a>
                 </div>
             </nav>
         </div>
     </header>
 
     <section id="hero">
-        <div class="container">
-            <h1>We Build Cloud-Native Software That Scales</h1>
-            <p>Razemedia delivers modern, secure, and high-performance applications using AWS, Azure, GCP, Kubernetes, serverless, and microservices — on time and on budget.</p>
-            <div>
-                <a href="#contact" class="btn">Start Your Project</a>
-                <a href="#services" class="btn btn-outline">View Services</a>
+        <div class="hero-content">
+            <div class="hero-badge">Cloud-Native Experts</div>
+            <h1>Building Scalable Software<br>That Powers the Future</h1>
+            <p class="hero-subtitle">We create high-performance cloud applications using AWS, Azure, GCP, Kubernetes, and modern architectures that scale effortlessly with your business.</p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i>
+                    Explore Services
+                </a>
+                <a href="#about" class="btn btn-secondary">
+                    <i class="fas fa-play"></i>
+                    Learn More
+                </a>
             </div>
         </div>
     </section>
 
     <section id="services">
         <div class="container">
-            <h2>Our Services</h2>
+            <h2 class="animate-on-scroll">Our Services</h2>
             <div class="services-grid">
-                <div class="service-card">
-                    <i class="fas fa-cloud"></i>
-                    <h3>Cloud Migration & Modernization</h3>
-                    <p>Lift-and-shift or full re-architecture — move your apps to the cloud with zero downtime.</p>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-cloud-arrow-up"></i>
+                    </div>
+                    <h3>Cloud Migration</h3>
+                    <p>Seamlessly migrate legacy systems to modern cloud platforms with zero downtime and maximum performance.</p>
                 </div>
-                <div class="service-card">
-                    <i class="fas fa-cubes"></i>
-                    <h3>Cloud-Native Development</h3>
-                    <p>New applications built from day one for Kubernetes, serverless, and event-driven architectures.</p>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <h3>Cloud-Native Apps</h3>
+                    <p>Build from scratch using Kubernetes, serverless, and microservices for ultimate scalability and speed.</p>
                 </div>
-                <div class="service-card">
-                    <i class="fas fa-shield-alt"></i>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-shield-halved"></i>
+                    </div>
                     <h3>DevOps & Automation</h3>
-                    <p>CI/CD pipelines, Infrastructure as Code (Terraform), monitoring, and observability.</p>
+                    <p>Implement CI/CD pipelines, Infrastructure as Code, and observability for faster, safer deployments.</p>
                 </div>
-                <div class="service-card">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>Performance & Cost Optimization</h3>
-                    <p>Cut cloud costs by up to 40% while boosting speed, reliability, and security.</p>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Performance Optimization</h3>
+                    <p>Reduce costs by 40%+ while boosting speed, reliability, and security with expert architectural review.</p>
                 </div>
             </div>
         </div>
@@ -392,62 +563,68 @@
 
     <section id="about">
         <div class="container">
-            <h2>Why Razemedia</h2>
             <div class="about-content">
-                <div class="about-text">
-                    <p>We are senior cloud architects and full-stack engineers with 10+ years building scalable cloud software for startups and enterprises.</p>
-                    <p>Deep expertise in AWS, Azure, Google Cloud, Kubernetes, Docker, Terraform, and serverless frameworks.</p>
-                    <p>No juniors. No outsourcing. Direct communication and clean, maintainable code from day one.</p>
+                <div class="about-text animate-on-scroll">
+                    <h3>Why Choose Razemedia</h3>
+                    <p>Senior cloud architects with 10+ years of experience building mission-critical systems for global companies.</p>
+                    <p>We specialize in modern cloud-native architectures that deliver unmatched performance, security, and cost efficiency.</p>
+                    <p>No juniors, no agencies, no middlemen—just direct expertise and clean, production-ready code.</p>
                 </div>
-                <div class="tech-stack">
-                    <div class="tech-card">
-                        <h3>Technologies</h3>
-                        <p>AWS • Azure • GCP • Kubernetes • Docker • Terraform • Serverless • Node.js • Python • React • TypeScript</p>
+                <div class="animate-on-scroll">
+                    <div class="tech-stack">
+                        <div class="tech-card">
+                            <h4>Cloud Platforms</h4>
+                            <p>AWS • Azure • GCP • Kubernetes • Docker</p>
+                        </div>
+                        <div class="tech-card">
+                            <h4>Infrastructure</h4>
+                            <p>Terraform • Serverless • CI/CD • Monitoring</p>
+                        </div>
+                        <div class="tech-card">
+                            <h4>Development</h4>
+                            <p>Node.js • Python • React • TypeScript • Go</p>
+                        </div>
+                        <div class="tech-card">
+                            <h4>Industries</h4>
+                            <p>FinTech • SaaS • E-Commerce • HealthTech</p>
+                        </div>
                     </div>
-                    <div class="tech-card">
-                        <h3>Industries</h3>
-                        <p>FinTech • HealthTech • E-Commerce • SaaS • EdTech • Logistics</p>
-                    </div>
+                </div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-item animate-on-scroll">
+                    <h4>10+</h4>
+                    <p>Years Experience</p>
+                </div>
+                <div class="stat-item animate-on-scroll">
+                    <h4>50+</h4>
+                    <p>Projects Delivered</p>
+                </div>
+                <div class="stat-item animate-on-scroll">
+                    <h4>99.99%</h4>
+                    <p>Uptime Guaranteed</p>
+                </div>
+                <div class="stat-item animate-on-scroll">
+                    <h4>40%</h4>
+                    <p>Cost Reduction</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- NEW IMPROVED CONTACT SECTION -->
-    <section id="contact">
-        <div class="contact-container">
-            <h2>Get In Touch</h2>
-            <p class="contact-subtitle">Ready to build scalable cloud software? Andey will personally review your project and get back to you within 4 hours.</p>
-            
-            <div class="contact-grid">
-                <div class="contact-card">
-                    <div class="contact-icon">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <h3>Direct Contact</h3>
-                    <p><strong>Andey</strong><br>Founder & Lead Architect</p>
-                    <a href="mailto:andey@razemedia.net" class="contact-email-link" title="Email Andey">
-                        andey@razemedia.net
-                    </a>
-                </div>
-                
-                <div class="contact-card">
-                    <div class="contact-icon">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <h3>Quick Start</h3>
-                    <p>Share your project requirements<br>and get a free consultation</p>
-                    <a href="mailto:andey@razemedia.net?subject=New%20Project%20Inquiry&body=Hi%20Andey,%0A%0AI%27m%20interested%20in%20building:%0A" class="contact-email-link" title="Start New Project">
-                        Start New Project
-                    </a>
-                </div>
-            </div>
-
-            <div class="contact-cta">
-                <h3>💬 Response Guaranteed</h3>
-                <p>Emails sent to Andey receive priority response. Most inquiries get answered within 2-4 hours during business days.</p>
-                <a href="mailto:andey@razemedia.net" class="cta-button">
-                    <i class="fas fa-envelope"></i> Send Message Now
+    <section id="cta">
+        <div class="container">
+            <h2 class="animate-on-scroll">Ready to Transform Your Infrastructure?</h2>
+            <p class="animate-on-scroll">Join hundreds of businesses who've scaled effortlessly with Razemedia's cloud-native expertise.</p>
+            <div class="hero-buttons animate-on-scroll" style="justify-content: center; margin-top: 2rem;">
+                <a href="#services" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i>
+                    Start Building
+                </a>
+                <a href="#about" class="btn btn-secondary">
+                    <i class="fas fa-chart-line"></i>
+                    See Results
                 </a>
             </div>
         </div>
@@ -455,9 +632,42 @@
 
     <footer>
         <div class="container">
-            <p>© 2025 Razemedia • <a href="https://razemedia.net" style="color:var(--primary);">razemedia.net</a></p>
+            <p>&copy; 2025 Razemedia. Building the future of cloud software.</p>
         </div>
     </footer>
+
+    <script>
+        // Simple scroll animation trigger
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = `${Math.random() * 0.3}s`;
+                    entry.target.classList.add('animate-on-scroll');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(254, 254, 254, 0.98)';
+                header.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.background = 'rgba(254, 254, 254, 0.95)';
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.05)';
+            }
+        });
+    </script>
 
 </body>
 </html>
