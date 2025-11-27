@@ -1,27 +1,463 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>RazeMedia Inc</title>
-    <meta name="keywords" content=""/>
-    <meta name="description" content=""/>
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900|Varela+Round"
-          rel="stylesheet"/>
-    <link href="default.css" rel="stylesheet" type="text/css" media="all"/>
-    <link href="fonts.css" rel="stylesheet" type="text/css" media="all"/>
-    <!--[if IE 6]>
-    <link href="default_ie6.css" rel="stylesheet" type="text/css"/>
-    <![endif]-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Razemedia | Cloud-Native Software Development</title>
+    <meta name="description" content="Razemedia builds fast, secure, and scalable cloud-native applications using AWS, Azure, GCP, Kubernetes, and modern architectures.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --success: #10b981;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+        }
+        a { text-decoration: none; color: inherit; }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+
+        /* Header */
+        header {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        .logo {
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .logo span { color: var(--dark); }
+        .nav-links a {
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* Hero */
+        #hero {
+            padding: 130px 0 90px;
+            background: linear-gradient(135deg, #4361ee 0%, #3f37c9 100%);
+            color: white;
+            text-align: center;
+        }
+        #hero h1 {
+            font-size: 3.6rem;
+            margin-bottom: 1rem;
+        }
+        #hero p {
+            font-size: 1.3rem;
+            max-width: 750px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.92;
+        }
+        .btn {
+            display: inline-block;
+            padding: 14px 34px;
+            background: white;
+            color: var(--primary-dark);
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 0 10px;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary-dark);
+        }
+
+        section { padding: 100px 0; }
+        h2 {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+
+        .services-grid, .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .service-card, .tech-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            transition: transform 0.3s;
+        }
+        .service-card:hover, .tech-card:hover {
+            transform: translateY(-10px);
+        }
+        .service-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        #about { background: #f1f5f9; }
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+        }
+
+        /* NEW CONTACT SECTION */
+        #contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="none"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="75" cy="75" r="0.5" fill="rgba(255,255,255,0.03)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>');
+            pointer-events: none;
+        }
+
+        .contact-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        #contact h2 { 
+            font-size: 3.2rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, #e2e8f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-subtitle {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (min-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .contact-card:hover::before {
+            left: 100%;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover .contact-icon {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .contact-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .contact-email-link {
+            display: inline-block;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary), #3a56d4);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(67, 97, 238, 0.3);
+            letter-spacing: -0.025em;
+        }
+
+        .contact-email-link:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(67, 97, 238, 0.4);
+            text-decoration: none;
+        }
+
+        .contact-cta {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .contact-cta h3 {
+            color: var(--dark);
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .contact-cta p {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, var(--primary), #3a56d4);
+            color: white;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 25px rgba(67, 97, 238, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(67, 97, 238, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+        footer {
+            background: #0b1120;
+            color: #94a3b8;
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            #hero h1 { font-size: 2.8rem; }
+            .about-content { grid-template-columns: 1fr; }
+            #contact h2 { font-size: 2.5rem; }
+            .contact-card { padding: 2rem; }
+        }
+    </style>
 </head>
 <body>
-<div id="wrapper">
-    <div id="header-wrapper">
-        <div id="header" class="container">
-            <div id="logo">
-                <h1><a href="#">RazeMedia</a></h1>
-                <p>A software development company</p>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Raze<span>media</span></div>
+                <div class="nav-links">
+                    <a href="#hero">Home</a>
+                    <a href="#services">Services</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="container">
+            <h1>We Build Cloud-Native Software That Scales</h1>
+            <p>Razemedia delivers modern, secure, and high-performance applications using AWS, Azure, GCP, Kubernetes, serverless, and microservices — on time and on budget.</p>
+            <div>
+                <a href="#contact" class="btn">Start Your Project</a>
+                <a href="#services" class="btn btn-outline">View Services</a>
             </div>
         </div>
-    </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-cloud"></i>
+                    <h3>Cloud Migration & Modernization</h3>
+                    <p>Lift-and-shift or full re-architecture — move your apps to the cloud with zero downtime.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-cubes"></i>
+                    <h3>Cloud-Native Development</h3>
+                    <p>New applications built from day one for Kubernetes, serverless, and event-driven architectures.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>DevOps & Automation</h3>
+                    <p>CI/CD pipelines, Infrastructure as Code (Terraform), monitoring, and observability.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Performance & Cost Optimization</h3>
+                    <p>Cut cloud costs by up to 40% while boosting speed, reliability, and security.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2>Why Razemedia</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>We are senior cloud architects and full-stack engineers with 10+ years building scalable cloud software for startups and enterprises.</p>
+                    <p>Deep expertise in AWS, Azure, Google Cloud, Kubernetes, Docker, Terraform, and serverless frameworks.</p>
+                    <p>No juniors. No outsourcing. Direct communication and clean, maintainable code from day one.</p>
+                </div>
+                <div class="tech-stack">
+                    <div class="tech-card">
+                        <h3>Technologies</h3>
+                        <p>AWS • Azure • GCP • Kubernetes • Docker • Terraform • Serverless • Node.js • Python • React • TypeScript</p>
+                    </div>
+                    <div class="tech-card">
+                        <h3>Industries</h3>
+                        <p>FinTech • HealthTech • E-Commerce • SaaS • EdTech • Logistics</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW IMPROVED CONTACT SECTION -->
+    <section id="contact">
+        <div class="contact-container">
+            <h2>Get In Touch</h2>
+            <p class="contact-subtitle">Ready to build scalable cloud software? Andey will personally review your project and get back to you within 4 hours.</p>
+            
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Direct Contact</h3>
+                    <p><strong>Andey</strong><br>Founder & Lead Architect</p>
+                    <a href="mailto:andey@razemedia.net" class="contact-email-link" title="Email Andey">
+                        andey@razemedia.net
+                    </a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Quick Start</h3>
+                    <p>Share your project requirements<br>and get a free consultation</p>
+                    <a href="mailto:andey@razemedia.net?subject=New%20Project%20Inquiry&body=Hi%20Andey,%0A%0AI%27m%20interested%20in%20building:%0A" class="contact-email-link" title="Start New Project">
+                        Start New Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-cta">
+                <h3>💬 Response Guaranteed</h3>
+                <p>Emails sent to Andey receive priority response. Most inquiries get answered within 2-4 hours during business days.</p>
+                <a href="mailto:andey@razemedia.net" class="cta-button">
+                    <i class="fas fa-envelope"></i> Send Message Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Razemedia • <a href="https://razemedia.net" style="color:var(--primary);">razemedia.net</a></p>
+        </div>
+    </footer>
+
 </body>
 </html>
