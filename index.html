@@ -72,12 +72,52 @@
 
         .logo {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
             background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: white;
+            transform: rotate(-5deg);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover .logo-icon {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .logo-text {
+            display: flex;
+            align-items: baseline;
+            gap: 0.1rem;
+        }
+
+        .logo-text .raze {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--primary);
+        }
+
+        .logo-text .media {
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--dark);
+            letter-spacing: -0.02em;
+        }
+
+        .logo:hover .logo-text .media {
+            color: var(--primary);
         }
 
         .nav-links {
@@ -117,6 +157,7 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
+            justify-content: center;
             background: var(--gradient-dark);
             position: relative;
             overflow: hidden;
@@ -245,7 +286,7 @@
         /* Services */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 2.5rem;
             margin-top: 4rem;
         }
@@ -496,7 +537,15 @@
     <header>
         <div class="container">
             <nav>
-                <div class="logo">Raze<span>media</span></div>
+                <a href="#hero" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="raze">Raze</span>
+                        <span class="media">media</span>
+                    </div>
+                </a>
                 <div class="nav-links">
                     <a href="#hero">Home</a>
                     <a href="#services">Services</a>
